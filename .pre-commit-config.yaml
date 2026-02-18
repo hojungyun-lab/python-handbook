@@ -1,0 +1,44 @@
+---
+
+#
+# Updated in 2025.2
+# REF: https://github.com/peterjc/flake8-black/blob/master/.pre-commit-config.yaml
+#
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: check-yaml
+      - id: check-toml
+      - id: trailing-whitespace  # W291을 해결하는 훅 추가
+      - id: end-of-file-fixer  # 파일 끝 공백 수정
+      - id: detect-private-key
+      - id: debug-statements
+      - id: check-symlinks
+
+  - repo: https://github.com/psf/black
+    rev: 25.1.0
+    hooks:
+      - id: black
+        args: ["--line-length=120"] # 기본 88자
+        # exclude: >
+        #   (?x)^(
+        #           .*manage\.py|
+        #           .*api(\/|\\)migrations|
+        #           .*snapshots*
+        #   )
+
+  - repo: https://github.com/PyCQA/flake8
+    rev: 7.2.0
+    hooks:
+      - id: flake8
+        args: ["--ignore=F401,E203,E402,E501,E712,F405,W503,F811"]
+        # exclude: >
+        #   (?x)^(
+        #           .*manage\.py|
+        #           .*r2d2_backend_v2(\/|\\)settings*|
+        #           .*api(\/|\\)migrations|
+        #           .*compose(\/|\\)services(\/|\\)emulator*|
+        #           .*snapshots*
+        #   )
